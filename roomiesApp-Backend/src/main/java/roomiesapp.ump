@@ -1,21 +1,35 @@
 namespace model;
 
+
 class EazzyRoomie {
 1 <@>- * Roomie roomies;
 1 <@>- * Expense expenses;
 
 }
 
+@Entity
 class Roomie {
+depend javax.persistence.Entity;
+depend javax.persistence.Id;
+
 1 <@>- * Expense expenses;
+
+@Id
 unique username;
-phone;
-email;
-password;
+lazy phone;
+lazy email;
+lazy password;
 
 }
 
+@Entity
 class Expense {
+
+depend javax.persistence.Entity;
+depend javax.persistence.Id;
+
+@Id
+autounique id;
 Date date;
 description;
 Integer cost;

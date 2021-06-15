@@ -2,10 +2,13 @@
 /*This code was generated using the UMPLE 1.30.2.5248.dba0a5744 modeling language!*/
 
 package model;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.*;
 import java.sql.Date;
 
-// line 9 "../roomiesapp.ump"
+@Entity
+// line 11 "../roomiesapp.ump"
 public class Roomie
 {
 
@@ -33,11 +36,11 @@ public class Roomie
   // CONSTRUCTOR
   //------------------------
 
-  public Roomie(String aUsername, String aPhone, String aEmail, String aPassword, EazzyRoomie aEazzyRoomie)
+  public Roomie(String aUsername, EazzyRoomie aEazzyRoomie)
   {
-    phone = aPhone;
-    email = aEmail;
-    password = aPassword;
+    phone = null;
+    email = null;
+    password = null;
     if (!setUsername(aUsername))
     {
       throw new RuntimeException("Cannot create due to duplicate username. See http://manual.umple.org?RE003ViolationofUniqueness.html");
@@ -97,6 +100,7 @@ public class Roomie
     return wasSet;
   }
 
+  @Id
   public String getUsername()
   {
     return username;

@@ -5,7 +5,7 @@ package model;
 import java.util.*;
 import java.sql.Date;
 
-// line 3 "../roomiesapp.ump"
+// line 4 "../roomiesapp.ump"
 public class EazzyRoomie
 {
 
@@ -96,9 +96,9 @@ public class EazzyRoomie
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Roomie addRoomy(String aUsername, String aPhone, String aEmail, String aPassword)
+  public Roomie addRoomy(String aUsername)
   {
-    return new Roomie(aUsername, aPhone, aEmail, aPassword, this);
+    return new Roomie(aUsername, this);
   }
 
   public boolean addRoomy(Roomie aRoomy)

@@ -2,11 +2,20 @@
 /*This code was generated using the UMPLE 1.30.2.5248.dba0a5744 modeling language!*/
 
 package model;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.Date;
 
-// line 17 "../roomiesapp.ump"
+@Entity
+// line 26 "../roomiesapp.ump"
 public class Expense
 {
+
+  //------------------------
+  // STATIC VARIABLES
+  //------------------------
+
+  private static int nextId = 1;
 
   //------------------------
   // MEMBER VARIABLES
@@ -17,6 +26,11 @@ public class Expense
   private String description;
   private int cost;
   private Roomie claimant;
+
+  //Autounique Attributes
+
+  @Id
+  private int id;
 
   //Expense Associations
   private EazzyRoomie eazzyRoomie;
@@ -32,6 +46,7 @@ public class Expense
     description = aDescription;
     cost = aCost;
     claimant = aClaimant;
+    id = nextId++;
     boolean didAddEazzyRoomie = setEazzyRoomie(aEazzyRoomie);
     if (!didAddEazzyRoomie)
     {
@@ -98,6 +113,12 @@ public class Expense
   public Roomie getClaimant()
   {
     return claimant;
+  }
+
+  @Id
+  public int getId()
+  {
+    return id;
   }
   /* Code from template association_GetOne */
   public EazzyRoomie getEazzyRoomie()
@@ -168,6 +189,7 @@ public class Expense
   public String toString()
   {
     return super.toString() + "["+
+            "id" + ":" + getId()+ "," +
             "description" + ":" + getDescription()+ "," +
             "cost" + ":" + getCost()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
