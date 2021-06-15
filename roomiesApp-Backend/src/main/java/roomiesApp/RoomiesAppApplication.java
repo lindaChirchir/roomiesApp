@@ -18,7 +18,7 @@ public class RoomiesAppApplication {
 	
 	 @RequestMapping("/")
 	  public String greeting(){
-	    return "Hello world!";
+	    return "Jambo Ulimwengu!";
 	  }
 	
 	

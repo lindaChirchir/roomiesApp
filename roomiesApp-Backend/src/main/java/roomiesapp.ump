@@ -1,0 +1,24 @@
+namespace model;
+
+class EazzyRoomie {
+1 <@>- * Roomie roomies;
+1 <@>- * Expense expenses;
+
+}
+
+class Roomie {
+1 <@>- * Expense expenses;
+unique username;
+phone;
+email;
+password;
+
+}
+
+class Expense {
+Date date;
+description;
+Integer cost;
+Roomie claimant;
+
+}
