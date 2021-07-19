@@ -1,8 +1,19 @@
-namespace model;
+namespace roomiesApp.model;
 
-
+@Entity
 class EazzyRoomie {
+depend javax.persistence.Entity;
+depend javax.persistence.Id;
+depend javax.persistence.OneToMany;
+depend javax.persistence.FetchType;
+
+@Id
+address;
+
+@OneToMany(targetEntity=Roomie.class, mappedBy="eazzyRoomie", fetch=FetchType.EAGER)
 1 <@>- * Roomie roomies;
+
+@OneToMany(targetEntity=Expense.class, mappedBy="eazzyRoomie", fetch=FetchType.EAGER)
 1 <@>- * Expense expenses;
 
 }
@@ -12,7 +23,7 @@ class Roomie {
 depend javax.persistence.Entity;
 depend javax.persistence.Id;
 
-1 <@>- * Expense expenses;
+
 
 @Id
 unique username;
@@ -20,6 +31,7 @@ lazy phone;
 lazy email;
 lazy password;
 
+1 -- * Expense expenses;
 }
 
 @Entity
@@ -33,6 +45,8 @@ autounique id;
 Date date;
 description;
 Integer cost;
-Roomie claimant;
+claimant;
+
+
 
 }

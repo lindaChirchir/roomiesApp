@@ -1,13 +1,16 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.2.5248.dba0a5744 modeling language!*/
 
-package model;
+package roomiesApp.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import java.sql.Date;
 
 @Entity
-// line 26 "../roomiesapp.ump"
+// line 38 "../../roomiesapp.ump"
 public class Expense
 {
 
@@ -25,7 +28,7 @@ public class Expense
   private Date date;
   private String description;
   private int cost;
-  private Roomie claimant;
+  private String claimant;
 
   //Autounique Attributes
 
@@ -33,14 +36,18 @@ public class Expense
   private int id;
 
   //Expense Associations
+  @ManyToOne
+  @JoinColumn(name="eazzyRoomie")
   private EazzyRoomie eazzyRoomie;
+  @ManyToOne
+  @JoinColumn(name="roomie")
   private Roomie roomie;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Expense(Date aDate, String aDescription, int aCost, Roomie aClaimant, EazzyRoomie aEazzyRoomie, Roomie aRoomie)
+  public Expense(Date aDate, String aDescription, int aCost, String aClaimant, EazzyRoomie aEazzyRoomie, Roomie aRoomie)
   {
     date = aDate;
     description = aDescription;
@@ -87,7 +94,7 @@ public class Expense
     return wasSet;
   }
 
-  public boolean setClaimant(Roomie aClaimant)
+  public boolean setClaimant(String aClaimant)
   {
     boolean wasSet = false;
     claimant = aClaimant;
@@ -110,17 +117,19 @@ public class Expense
     return cost;
   }
 
-  public Roomie getClaimant()
+  public String getClaimant()
   {
     return claimant;
   }
 
-  @Id
+ 
   public int getId()
   {
     return id;
   }
   /* Code from template association_GetOne */
+  @ManyToOne
+  @JoinColumn(name="eazzyRoomie")
   public EazzyRoomie getEazzyRoomie()
   {
     return eazzyRoomie;
@@ -191,9 +200,9 @@ public class Expense
     return super.toString() + "["+
             "id" + ":" + getId()+ "," +
             "description" + ":" + getDescription()+ "," +
-            "cost" + ":" + getCost()+ "]" + System.getProperties().getProperty("line.separator") +
+            "cost" + ":" + getCost()+ "," +
+            "claimant" + ":" + getClaimant()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "date" + "=" + (getDate() != null ? !getDate().equals(this)  ? getDate().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
-            "  " + "claimant" + "=" + (getClaimant() != null ? !getClaimant().equals(this)  ? getClaimant().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "eazzyRoomie = "+(getEazzyRoomie()!=null?Integer.toHexString(System.identityHashCode(getEazzyRoomie())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "roomie = "+(getRoomie()!=null?Integer.toHexString(System.identityHashCode(getRoomie())):"null");
   }

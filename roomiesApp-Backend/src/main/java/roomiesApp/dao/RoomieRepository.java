@@ -1,9 +1,11 @@
-package dao;
+package roomiesApp.dao;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import model.Roomie;
+import roomiesApp.model.Roomie;
 
+@Repository
 public interface RoomieRepository extends CrudRepository<Roomie, String> {
-	Roomie findRoomieByName(String name);
+	Roomie findRoomieByUsername(String username);
 }

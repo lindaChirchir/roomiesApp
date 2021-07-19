@@ -1,11 +1,16 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.2.5248.dba0a5744 modeling language!*/
 
-package model;
+package roomiesApp.model;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
 import java.util.*;
 import java.sql.Date;
 
-// line 4 "../roomiesapp.ump"
+@Entity
+// line 4 "../../roomiesapp.ump"
 public class EazzyRoomie
 {
 
@@ -13,16 +18,24 @@ public class EazzyRoomie
   // MEMBER VARIABLES
   //------------------------
 
+  //EazzyRoomie Attributes
+
+	@Id
+  private String address;
+
   //EazzyRoomie Associations
+	@OneToMany(targetEntity=Roomie.class, mappedBy="eazzyRoomie", fetch=FetchType.EAGER)
   private List<Roomie> roomies;
+	@OneToMany(targetEntity=Expense.class, mappedBy="eazzyRoomie", fetch=FetchType.EAGER)
   private List<Expense> expenses;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public EazzyRoomie()
+  public EazzyRoomie(String aAddress)
   {
+    address = aAddress;
     roomies = new ArrayList<Roomie>();
     expenses = new ArrayList<Expense>();
   }
@@ -30,6 +43,19 @@ public class EazzyRoomie
   //------------------------
   // INTERFACE
   //------------------------
+
+  public boolean setAddress(String aAddress)
+  {
+    boolean wasSet = false;
+    address = aAddress;
+    wasSet = true;
+    return wasSet;
+  }
+
+  public String getAddress()
+  {
+    return address;
+  }
   /* Code from template association_GetMany */
   public Roomie getRoomy(int index)
   {
@@ -37,6 +63,7 @@ public class EazzyRoomie
     return aRoomy;
   }
 
+  
   public List<Roomie> getRoomies()
   {
     List<Roomie> newRoomies = Collections.unmodifiableList(roomies);
@@ -168,7 +195,7 @@ public class EazzyRoomie
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Expense addExpense(Date aDate, String aDescription, int aCost, Roomie aClaimant, Roomie aRoomie)
+  public Expense addExpense(Date aDate, String aDescription, int aCost, String aClaimant, Roomie aRoomie)
   {
     return new Expense(aDate, aDescription, aCost, aClaimant, this, aRoomie);
   }
@@ -253,4 +280,10 @@ public class EazzyRoomie
     
   }
 
+
+  public String toString()
+  {
+    return super.toString() + "["+
+            "address" + ":" + getAddress()+ "]";
+  }
 }

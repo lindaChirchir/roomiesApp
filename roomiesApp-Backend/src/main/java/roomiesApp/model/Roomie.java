@@ -1,14 +1,19 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.30.2.5248.dba0a5744 modeling language!*/
 
-package model;
+package roomiesApp.model;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import java.util.*;
 import java.sql.Date;
 
 @Entity
-// line 11 "../roomiesapp.ump"
+// line 22 "../../roomiesapp.ump"
 public class Roomie
 {
 
@@ -23,13 +28,17 @@ public class Roomie
   //------------------------
 
   //Roomie Attributes
+  @Id
   private String username;
   private String phone;
   private String email;
   private String password;
 
   //Roomie Associations
+  @OneToMany(targetEntity=Expense.class, mappedBy="roomie", fetch=FetchType.EAGER)
   private List<Expense> expenses;
+  @ManyToOne
+  @JoinColumn(name="eazzyRoomie")
   private EazzyRoomie eazzyRoomie;
 
   //------------------------
@@ -100,7 +109,7 @@ public class Roomie
     return wasSet;
   }
 
-  @Id
+  
   public String getUsername()
   {
     return username;
@@ -161,6 +170,8 @@ public class Roomie
     return index;
   }
   /* Code from template association_GetOne */
+  @ManyToOne
+  @JoinColumn(name="eazzyRoomie")
   public EazzyRoomie getEazzyRoomie()
   {
     return eazzyRoomie;
@@ -171,7 +182,7 @@ public class Roomie
     return 0;
   }
   /* Code from template association_AddManyToOne */
-  public Expense addExpense(Date aDate, String aDescription, int aCost, Roomie aClaimant, EazzyRoomie aEazzyRoomie)
+  public Expense addExpense(Date aDate, String aDescription, int aCost, String aClaimant, EazzyRoomie aEazzyRoomie)
   {
     return new Expense(aDate, aDescription, aCost, aClaimant, aEazzyRoomie, this);
   }
@@ -260,13 +271,11 @@ public class Roomie
   public void delete()
   {
     roomiesByUsername.remove(getUsername());
-    while (expenses.size() > 0)
+    for(int i=expenses.size(); i > 0; i--)
     {
-      Expense aExpense = expenses.get(expenses.size() - 1);
+      Expense aExpense = expenses.get(i - 1);
       aExpense.delete();
-      expenses.remove(aExpense);
     }
-    
     EazzyRoomie placeholderEazzyRoomie = eazzyRoomie;
     this.eazzyRoomie = null;
     if(placeholderEazzyRoomie != null)
