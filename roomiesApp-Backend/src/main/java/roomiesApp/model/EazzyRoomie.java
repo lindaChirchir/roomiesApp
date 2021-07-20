@@ -33,6 +33,7 @@ public class EazzyRoomie
   // CONSTRUCTOR
   //------------------------
 
+	public EazzyRoomie() {}
   public EazzyRoomie(String aAddress)
   {
     address = aAddress;

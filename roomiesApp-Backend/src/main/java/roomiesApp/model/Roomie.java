@@ -45,6 +45,8 @@ public class Roomie
   // CONSTRUCTOR
   //------------------------
 
+  
+  public Roomie() {}
   public Roomie(String aUsername, EazzyRoomie aEazzyRoomie)
   {
     phone = null;

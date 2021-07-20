@@ -28,7 +28,7 @@ public class Expense
   private Date date;
   private String description;
   private int cost;
-  private String claimant;
+  private String debtor;
 
   //Autounique Attributes
 
@@ -47,12 +47,14 @@ public class Expense
   // CONSTRUCTOR
   //------------------------
 
+  public Expense() {}
+  
   public Expense(Date aDate, String aDescription, int aCost, String aClaimant, EazzyRoomie aEazzyRoomie, Roomie aRoomie)
   {
     date = aDate;
     description = aDescription;
     cost = aCost;
-    claimant = aClaimant;
+    debtor = aClaimant;
     id = nextId++;
     boolean didAddEazzyRoomie = setEazzyRoomie(aEazzyRoomie);
     if (!didAddEazzyRoomie)
@@ -97,7 +99,7 @@ public class Expense
   public boolean setClaimant(String aClaimant)
   {
     boolean wasSet = false;
-    claimant = aClaimant;
+    debtor = aClaimant;
     wasSet = true;
     return wasSet;
   }
@@ -119,7 +121,7 @@ public class Expense
 
   public String getClaimant()
   {
-    return claimant;
+    return debtor;
   }
 
  
